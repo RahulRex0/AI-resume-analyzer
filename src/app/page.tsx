@@ -1,66 +1,75 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+import { useState } from "react"
+
+export default function Home(){
+
+  type AnalysisResult={
+    matchScore:number;
+    strongMatches:string[];
+    missingKeywords:string[];
+    improvementNotes: string[];
+  };
+
+  const [resumeText,setResumeText]=useState("");
+  const [jobDescription,setJobDescription]=useState("");
+  const [result, setResult] = useState<AnalysisResult | null>(null);
+
+  async function handleAnalyze() {
+    const response = await fetch("/api/analyze", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        resumeText,
+        jobDescription,
+      }),
+    });
+  
+    const data = await response.json();
+    setResult(data);
+  
+    console.log("AI result:", data);
+  }
+
+  return(
+    <main>
+      <div>AI Resume Analyzer</div>
+      <label htmlFor="resume">Resume text</label>
+      <textarea id="resume" value={resumeText} onChange={(event)=>setResumeText(event.target.value)}placeholder="paste your resume text here..."></textarea>
+      <label htmlFor="description">Job Description</label>
+      <textarea id="description" value={jobDescription} onChange={(event)=>setJobDescription(event.target.value)} placeholder="paste your job description here..."></textarea>
+
+      <button onClick={handleAnalyze}>Analyze Resume</button>
+
+      {result&&(
+        <div>
+          <div>Analysis Result</div>
+          <div>Match score:{result.matchScore}</div>
+          <div>Strong Matches</div>
+          <ul>
+            {result.strongMatches.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <div>Missing Keyword</div>
+          <ul>
+            {result.missingKeywords.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <div>Improvement Notes</div>
+          <ul>
+            {result.improvementNotes.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+      )}
+
+    </main>
+  )
+
 }
