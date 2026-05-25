@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import styles from "@/app/page.module.css"
 
 export default function Home(){
 
@@ -34,15 +35,40 @@ export default function Home(){
   }
 
   return(
-    <main>
-      <div>AI Resume Analyzer</div>
-      <label htmlFor="resume">Resume text</label>
-      <textarea id="resume" value={resumeText} onChange={(event)=>setResumeText(event.target.value)}placeholder="paste your resume text here..."></textarea>
-      <label htmlFor="description">Job Description</label>
-      <textarea id="description" value={jobDescription} onChange={(event)=>setJobDescription(event.target.value)} placeholder="paste your job description here..."></textarea>
+    <main className={styles.main}>
+      <div className={styles.text}>
+        <div className={styles.first}>AI-Powered Resume Insights</div>
+        <div className={styles.heading}>AI Resume Analyzer</div>
+        <div className={styles.textarea}>Paste your resume and the job description below to instantly see how well you match — plus actionable feedback to land the interview.</div>
+      </div>
+      <div className={styles.boxArea}>
+        <div className={styles.box}>
+          <div className={styles.inputGroup}>
+                <label htmlFor="resume" className={styles.label}>📄 Resume Text</label>
+                <textarea 
+                  id="resume" 
+                  className={styles.textareaBox}
+                  value={resumeText} 
+                  onChange={(event)=>setResumeText(event.target.value)}
+                  placeholder="Paste your resume text here..."
+                ></textarea>
+          </div>
 
-      <button onClick={handleAnalyze}>Analyze Resume</button>
-
+          <div className={styles.inputGroup}>
+              <label htmlFor="description" className={styles.label}>💼 Job Description</label>
+              <textarea 
+                id="description" 
+                className={styles.textareaBox}
+                value={jobDescription} 
+                onChange={(event)=>setJobDescription(event.target.value)} 
+                placeholder="Paste your job description here..."
+              ></textarea>
+          </div>
+        </div>
+          <div className={styles.buttonbox}>
+            <button onClick={handleAnalyze} className={styles.button}>Analyze Resume</button>
+          </div>
+      </div>
       {result&&(
         <div>
           <div>Analysis Result</div>

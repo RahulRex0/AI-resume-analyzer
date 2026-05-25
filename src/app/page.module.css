@@ -1,142 +1,100 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+.main{
+  min-height: 100vh;
+  margin: 0 auto;
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(99, 102, 241, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(circle at 85% 90%, rgba(236, 72, 153, 0.16), transparent 45%),
+    linear-gradient(180deg, #0b1020 0%, #0a0a16 100%);
+  color: #f8fafc;
+}
+.text{
+  text-align: center;
+  margin-bottom: 25px;
+}
+.heading{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: 54px;
+  background: linear-gradient(to right, #6d6cff, #ec4da0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.textarea{
+  text-align: center;
+  max-width: 550px;
+  font-size: 17px;
+  margin: 0 auto;
+  line-height: 1.5;
+  color: rgb(182, 181, 181);
+  font-weight:100;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.first{
+  margin-top: 70px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #c0c7d3;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 6px 14px;
+  display: inline-flex;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: uppercase;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
-
-.main {
-  display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
-}
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
   gap: 8px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(10px);
 }
-
-a.secondary {
-  border-color: var(--button-secondary-border);
+.first::before {
+  align-items: center;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  box-shadow: 0 0 12px 2px rgba(139, 92, 246, 0.65);
 }
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+.boxArea{
+  background-color: #0a0a16;
+  margin: 0 auto;  
+  padding: 40px; 
+  max-width: 900px; 
+  border-radius: 20px;
 }
-
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
+.textareaBox{
+  height: 200px;
+  width: 400px;
 }
+.box{
+  display: flex;
+  justify-content: center;
+  gap: 30px; 
+}
+.label{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+}
+.label textarea{
+  display: block;
+}
+.buttonbox{
+  display: flex;
+  justify-content: center;
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
+}
+.button{
+  padding: 1rem 2rem;
+  margin-top: 20px ;
+  border-radius: 10px;
 }
