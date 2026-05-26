@@ -70,29 +70,51 @@ export default function Home(){
           </div>
       </div>
       {result&&(
-        <div>
-          <div>Analysis Result</div>
-          <div>Match score:{result.matchScore}</div>
-          <div>Strong Matches</div>
-          <ul>
-            {result.strongMatches.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+        <div className={styles.result}>
+          <div className={styles.matchScore}>
+            <div className={styles.mark}>{result.matchScore}/100</div>
+            <div className={styles.matchDescription}>
+              <div>Match score</div>
+              <div style={{fontFamily: 'arial,san-serif', color: 'rgb(182, 181, 181)' }}>Based on alignment between your resume and the job description.</div>
+            </div>
 
-          <div>Missing Keyword</div>
-          <ul>
-            {result.missingKeywords.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <div>Improvement Notes</div>
-          <ul>
-            {result.improvementNotes.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
+          </div>
+          <div className={styles.bottom}>
+              <div className={`${styles.cards} ${styles.matchCard}`}>
+                <div className={styles.cardHeader}>
+                  <span className={styles.cardIcon}>✓</span>
+                  <span className={styles.cardTitle}>Strong Matches</span>
+                </div>
+                    <ul>
+                      {result.strongMatches.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+              </div>
+              <div className={`${styles.cards} ${styles.missingCard}`}>
+                  <div className={styles.cardHeader}>
+                    <span className={styles.cardIcon}>!</span>
+                    <span className={styles.cardTitle}>Missing Keywords</span>
+                  </div>
+                  <ul>
+                    {result.missingKeywords.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+              </div>
+              <div className={`${styles.cards} ${styles.notesCard}`}>
+                  <div className={styles.cardHeader}>
+                    <span className={styles.cardIcon}>★</span>
+                    <span className={styles.cardTitle}>Improvement Notes</span>
+                  </div>
+                  <ul>
+                    {result.improvementNotes.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+              </div>
+            </div>
+          </div>
       )}
 
     </main>

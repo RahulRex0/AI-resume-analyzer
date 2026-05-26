@@ -1,5 +1,5 @@
 .main{
-  min-height: 100vh;
+  min-height: 120vh;
   margin: 0 auto;
   background:
     radial-gradient(
@@ -63,7 +63,8 @@
   box-shadow: 0 0 12px 2px rgba(139, 92, 246, 0.65);
 }
 .boxArea{
-  background-color: #0a0a16;
+  background-color: #1a1a2e;
+  border: 1px solid rgba(255, 255, 255, 0.08); 
   margin: 0 auto;  
   padding: 40px; 
   max-width: 900px; 
@@ -72,6 +73,9 @@
 .textareaBox{
   height: 200px;
   width: 400px;
+  background-color: #141427;
+  color: #f8fafc;    
+  border-radius: 10px;            
 }
 .box{
   display: flex;
@@ -83,7 +87,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  
+  margin-bottom: 10px;
 }
 .label textarea{
   display: block;
@@ -94,7 +98,106 @@
 
 }
 .button{
+  text-align: center;
   padding: 1rem 2rem;
   margin-top: 20px ;
   border-radius: 10px;
+  background: linear-gradient(to right, #6d6cff, #ec4da0);
+  -webkit-background-clip: padding;
+  background-clip: padding;
+  color: white;
+  font-weight: bold;
+  font-size: 15;
+  border: 0;
+  transition: transform 0.3s ease;
+}
+.button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+}
+.result{
+  margin:40 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+.matchScore{
+  width: 100%;  
+  justify-content: flex-start;
+  display: flex;
+  gap:10px;
+  align-items: center;
+  background-color: rgba(15, 15, 30, 0.6);
+  border: 1px solid rgba(96, 69, 69, 0.08); 
+  border-radius: 20px;
+  padding: 2rem 15rem;
+  
+}
+.mark{
+  margin-left: -14rem;
+  font-size: 60;
+}
+.matchDescription{
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.bottom{
+  display: flex;
+  gap: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 20px;
+  width: calc(100% + 30rem);
+}
+.cards{
+  box-sizing: border-box;
+  flex: 1;
+  padding: 1.25rem;
+  text-align: left;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, var(--accent-bg), transparent),
+    rgba(15, 15, 30, 0.6);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  box-shadow: 0 0 30px -10px var(--accent);
+}
+.matchCard   { --accent: #10b981; --accent-bg: rgba(16, 185, 129, 0.08); }
+.missingCard { --accent: #ef4444; --accent-bg: rgba(239, 68, 68, 0.08); }
+.notesCard   { --accent: #3b82f6; --accent-bg: rgba(59, 130, 246, 0.08); }
+
+.cardHeader{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cardIcon{
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 14px;
+}
+.cardTitle{
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+.notesCard   { --accent: #3b82f6; --accent-bg: rgba(59, 130, 246, 0.08); }
+.cards > div,
+.cards ul{
+  margin-left: 0;
+  width: auto;
+}
+.cards ul{
+  margin-top: 1rem;
+  padding-left: 0;
+  list-style-position: inside;
 }
