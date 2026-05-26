@@ -10,6 +10,7 @@ export default function Home(){
     strongMatches:string[];
     missingKeywords:string[];
     improvementNotes: string[];
+    rewrittenBullets: { original: string; rewritten: string }[];
   };
 
   const [resumeText,setResumeText]=useState("");
@@ -102,6 +103,10 @@ export default function Home(){
       </div>
       {result&&(
         <div className={styles.result}>
+          <div className={styles.resultHeading}>
+            <span className={styles.resultIcon}>✦</span>
+            <span>Analysis Result</span>
+          </div>
           <div className={styles.matchScore}>
             <div className={styles.mark}>{result.matchScore}/100</div>
             <div className={styles.matchDescription}>
@@ -145,6 +150,29 @@ export default function Home(){
                   </ul>
               </div>
             </div>
+            {result.rewrittenBullets && result.rewrittenBullets.length > 0 && (
+              <div className={styles.rewriteSection}>
+                <div className={styles.rewriteHeading}>
+                  <span className={styles.rewriteIcon}>✎</span>
+                  <span>Suggested Rewritten Bullets</span>
+                </div>
+                <div className={styles.rewriteList}>
+                  {result.rewrittenBullets.map((bullet, idx) => (
+                    <div key={idx} className={styles.rewriteCard}>
+                      <div className={styles.rewriteBefore}>
+                        <span className={styles.rewriteLabel}>Before</span>
+                        <p>{bullet.original}</p>
+                      </div>
+                      <div className={styles.rewriteArrow}>↓</div>
+                      <div className={styles.rewriteAfter}>
+                        <span className={styles.rewriteLabel}>After</span>
+                        <p>{bullet.rewritten}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
       )}
 

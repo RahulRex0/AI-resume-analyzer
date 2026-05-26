@@ -28,6 +28,8 @@ You are an AI resume analyzer.
 
 Compare this resume with this job description.
 
+For "rewrittenBullets": pick 3 to 5 of the weakest or most generic bullet points from the resume and rewrite each one to be more measurable, action-driven, and aligned with the job description's language. Keep rewrites concise (one line each) and realistic — do not invent metrics or experience the candidate does not mention.
+
 Return ONLY valid JSON.
 Do not include markdown.
 Do not include explanation outside JSON.
@@ -37,7 +39,10 @@ JSON format:
   "matchScore": number,
   "strongMatches": string[],
   "missingKeywords": string[],
-  "improvementNotes": string[]
+  "improvementNotes": string[],
+  "rewrittenBullets": [
+    { "original": string, "rewritten": string }
+  ]
 }
 
 Resume:
