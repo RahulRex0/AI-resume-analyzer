@@ -15,23 +15,51 @@ export default function Home(){
   const [resumeText,setResumeText]=useState("");
   const [jobDescription,setJobDescription]=useState("");
   const [result, setResult] = useState<AnalysisResult | null>(null);
+  const[isLoading, setIsLoading]=useState(false);
+  const[error,setError]=useState("");
+
 
   async function handleAnalyze() {
-    const response = await fetch("/api/analyze", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        resumeText,
-        jobDescription,
-      }),
-    });
+    setError("");
+    setResult(null);
+    if(!resumeText.trim() || !jobDescription.trim() )
+    {
+      setError("please paste both fields");
+      return;
+    }
+    try {
+      setIsLoading(true);
   
-    const data = await response.json();
-    setResult(data);
+      const response = await fetch("/api/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          resumeText,
+          jobDescription,
+        }),
+      });
   
-    console.log("AI result:", data);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Something went wrong.");
+      }
+  
+      const data = await response.json();
+      setResult(data);
+  
+      console.log("AI result:", data);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Failed to analyze resume. Please try again.");
+      }
+    }
+    finally {
+      setIsLoading(false);
+    }
   }
 
   return(
@@ -66,8 +94,11 @@ export default function Home(){
           </div>
         </div>
           <div className={styles.buttonbox}>
-            <button onClick={handleAnalyze} className={styles.button}>Analyze Resume</button>
+            <button onClick={handleAnalyze} className={styles.button} disabled={isLoading}>
+              {isLoading ? "Analyzing..." : "Analyze Resume"}
+            </button>
           </div>
+          {error && <p className={styles.error}>{error}</p>}
       </div>
       {result&&(
         <div className={styles.result}>

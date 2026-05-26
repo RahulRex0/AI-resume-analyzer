@@ -201,3 +201,9 @@
   padding-left: 0;
   list-style-position: inside;
 }
+.error {
+  text-align: center;
+  color: #f87171;
+  margin-top: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
