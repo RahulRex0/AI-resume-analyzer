@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Resume Analyzer
 
-## Getting Started
+Paste your resume and a job description — Gemini scores your match, flags missing keywords, and rewrites weak bullets into measurable, action-driven language.
 
-First, run the development server:
+**Live demo:** https://ai-resume-analyzer-seven-umber.vercel.app
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/243d01bc-e2fe-43e6-b97c-4cdaef059a69" width="48%" />
+  <img src="https://github.com/user-attachments/assets/8f1481cb-f968-4704-ae0d-d5069b9bbb97" width="48%" />
+  <img width="48%" src="https://github.com/user-attachments/assets/33299043-c4ed-49de-b789-c101dc358e4c" />
+  
+## Features
+
+- **Match score (0–100)** — overall fit between resume and job description
+- **Strong matches** — skills you already have that the job description asks for
+- **Missing keywords** — gaps to address before applying
+- **Improvement notes** — actionable, role-specific suggestions
+- **Rewritten bullets** — before/after rewrites of weak resume lines, kept honest (no invented metrics)
+
+## Tech stack
+
+- [Next.js 16](https://nextjs.org/) (App Router)
+- React 19
+- TypeScript
+- CSS Modules
+- [Google Gemini](https://ai.google.dev/) via `@google/genai` (model: `gemini-2.5-flash`)
+- Deployed on [Vercel](https://vercel.com/)
+
+## Getting started
+
+### 1. Clone and install
+
+```bash
+git clone https://github.com/RahulRex0/AI-resume-analyzer.git
+cd AI-resume-analyzer
+npm install
+```
+
+### 2. Set up your environment
+
+Create a `.env.local` file in the project root:
+
+```
+GEMINI_API_KEY=your_key_here
+```
+
+Get a free API key at [Google AI Studio](https://aistudio.google.com/apikey).
+
+### 3. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GEMINI_API_KEY` | yes | Google AI Studio API key |
 
-## Learn More
+## How it works
 
-To learn more about Next.js, take a look at the following resources:
+1. User pastes a resume + job description and clicks **Analyze Resume**.
+2. The client POSTs both inputs to `/api/analyze`.
+3. The server sends a structured prompt to Gemini, asking for strict JSON output.
+4. The response is parsed and returned to the client, which renders themed result cards.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/
+    page.tsx              Main client UI (form + results)
+    page.module.css       Styles
+    api/
+      analyze/
+        route.ts          Gemini integration & JSON parsing
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is deployed on Vercel. To deploy your own copy:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push the repo to GitHub.
+2. Import the project at [vercel.com/new](https://vercel.com/new).
+3. Add `GEMINI_API_KEY` under **Settings → Environment Variables** (for Production, Preview, and Development).
+4. Redeploy from the **Deployments** tab.
+
+## Roadmap
+
+- [ ] Upload a PDF resume instead of pasting text
+- [ ] Save past analyses to a database
+- [ ] Compare a resume against multiple job descriptions at once
+- [ ] One-click copy for rewritten bullets
+- [ ] Export full analysis as PDF
+
+## License
+
+MIT
